@@ -161,7 +161,9 @@ def snpLdTabix(snp,chrom,bp,tabixDir,window,r2min,ldInfo):
     if st < 0:
         st = 0
     en = bp + window
-    
+   
+    st = int(st)
+    en = int(en)
     query = "tabix {tabixFile} {chrom}:{st}-{en} | awk '$6 >= {r2min} {{print $0}}' | grep -w {snp}".format(**locals())
     proc = Popen(query,shell=True,stdout=PIPE)
     
